@@ -1,4 +1,4 @@
-set(FREETYPELIB_DIR ${LIBS_DIR}/freetype)
+set(FREETYPELIB_DIR ${CMAKE_CURRENT_LIST_DIR}/../deps/freetype)
 
 file(GLOB PUBLIC_HEADERS "${FREETYPELIB_DIR}/include/ft2build.h" "${FREETYPELIB_DIR}/include/freetype/*.h")
 file(GLOB PUBLIC_CONFIG_HEADERS "${FREETYPELIB_DIR}/include/freetype/config/*.h")
@@ -46,6 +46,7 @@ set(BASE_SRCS
         ${FREETYPELIB_DIR}/src/type42/type42.c
         ${FREETYPELIB_DIR}/src/winfonts/winfnt.c
         ${FREETYPELIB_DIR}/src/base/ftdebug.c
+        ${FREETYPELIB_DIR}/src/svg/ftsvg.c
         )
 
 list(APPEND BASE_SRCS "${FREETYPELIB_DIR}/src/base/ftsystem.c")

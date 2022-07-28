@@ -6,17 +6,23 @@
 #define SHOEGAZE2_SYSTEM_H
 
 #include <vector>
+#include <Shoegaze2/System/Interface/GUI/IUISystem.h>
 #include <Shoegaze2/Apps/Application.h>
 
 namespace Shoegaze2 {
     class System {
-    public:
+    private:
+        IUISystem* ui;
         std::vector<Application*> apps;
         Application *currentApplication;
+    public:
+        System(IUISystem* ui) : ui(ui) {
+            ui->OnClick = [&](Position p) { OnClickEvent(p.x, p.y); };
+        }
 
         template<class AppClass>
         void LaunchApp() {
-            Application *app = (Application*)new AppClass();
+            auto *app = (Application*)new AppClass();
             apps.emplace_back(app);
             currentApplication = app;
         }
@@ -32,14 +38,10 @@ namespace Shoegaze2 {
             }
         }
 
-        void OnTouchEvent(float x, float y) {
+        void OnClickEvent(float x, float y) {
             if (currentApplication != nullptr) {
-                currentApplication->OnTouchEvent(x, y);
+                currentApplication->OnClickEvent(x, y);
             }
-        }
-
-        void OnAudio() {
-
         }
     };
 }

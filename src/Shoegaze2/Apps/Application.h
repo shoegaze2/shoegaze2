@@ -17,12 +17,12 @@ namespace Shoegaze2 {
     protected:
         void SetContent(Container *contentView) {
             this->content = contentView;
-            contentCanvas->Resize(contentView->GetSize());
-            contentCanvas->SetPosition(contentView->GetPosition());
+            contentCanvas.Resize(contentView->GetSize());
+            contentCanvas.SetPosition(contentView->GetPosition());
         }
     public:
         Application() : canvas(Position(0, 0), Size(IRenderingContext::Get()->GetWidth(), IRenderingContext::Get()->GetHeight())),
-                        contentCanvas(Position(0, 0), Size(0, 0), canvas) {
+                        contentCanvas(Position(100, 100), Size(0, 0), canvas) {
 
         }
 
@@ -39,12 +39,11 @@ namespace Shoegaze2 {
             content->OnDraw(contentCanvas);
         }
 
-        void OnTouchEvent(float x, float y) {
+        void OnClickEvent(float x, float y) {
             if (content != nullptr)
-                content->OnTouchEvent(x, y);
+                content->OnClickEvent(x, y);
         }
 
-        virtual void AudioHandler() {};
     };
 }
 

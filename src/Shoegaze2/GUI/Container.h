@@ -18,7 +18,7 @@ namespace Shoegaze2 {
     public:
         Event<Position> onClickEvent;
 
-        virtual void OnDraw(Canvas) {};
+        virtual void OnDraw(const Canvas &canvas) {};
         virtual void OnResize(Size newSize) { size = newSize; };
 
         Size GetSize() { return size; }
@@ -26,8 +26,8 @@ namespace Shoegaze2 {
         Position GetPosition() { return position; }
         void SetPosition(Position p) { position = p; }
 
-        virtual void OnTouchEvent(float x, float y) {
-            onClickEvent.Invoke({x - position.x, y - position.y});
+        virtual void OnClickEvent(float x, float y) {
+            onClickEvent.Invoke({position.x, position.y});
         }
 
         virtual void Update() {};

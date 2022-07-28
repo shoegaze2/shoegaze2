@@ -21,7 +21,7 @@ namespace Shoegaze2 {
     public:
         Button()
         {
-            backgroundPaint->SetColor(Color::FromRGBf(0.75f, 0, 0.75f));
+            backgroundPaint->SetColor(Color::FromRGBf(0, 0, 0));
             textPaint->SetColor(Color::FromRGBf(1, 1, 1));
             backgroundBrush->SetPaint(backgroundPaint);
             textBrush->SetPaint(textPaint);
@@ -46,7 +46,7 @@ namespace Shoegaze2 {
             }
         }
 
-        void OnDraw(Canvas canvas)
+        void OnDraw(const Canvas &canvas)
         {
             canvas.DrawPath(rect, backgroundBrush);
             float fontHeight = size.height/2;

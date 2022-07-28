@@ -19,10 +19,23 @@ namespace Shoegaze2 {
         std::vector<Child> children;
     public:
         void PostUpdate() {
+            float maxX = 0, maxY = 0;
             for (auto &c : children) {
-                c.canvas->SetPosition(c.container->GetPosition());
-                c.canvas->Resize(c.container->GetSize());
+                auto cPos = c.container->GetPosition();
+                auto cSize = c.container->GetSize();
+                c.canvas.SetPosition(cPos);
+                c.canvas.Resize(cSize);
+
+                if (cPos.x + cSize.width > maxX) {
+                    maxX = cPos.x + cSize.width;
+                }
+
+                if (cPos.y + cSize.height > maxY) {
+                    maxY = cPos.y + cSize.height;
+                }
             }
+
+            SetSize({maxX, maxY});
         }
         virtual void Update() override {
             for (auto &c : children) {
@@ -30,9 +43,9 @@ namespace Shoegaze2 {
             }
         };
 
-        void OnDraw(Canvas canvas) override {
+        void OnDraw(const Canvas &canvas) override {
             for (auto &c : children) {
-                c.canvas->SetParent(canvas.ptr);
+                c.canvas.SetParent(canvas);
                 c.container->OnDraw(c.canvas);
             }
         }
@@ -42,10 +55,14 @@ namespace Shoegaze2 {
             children.emplace_back(Child{c, canvas});
         }
 
-        void OnTouchEvent(float x, float y) override {
-            Container::OnTouchEvent(x, y);
+        void OnClickEvent(float x, float y) override {
+            Container::OnClickEvent(x, y);
             for (auto &c : children) {
-                c.container->OnTouchEvent(x - position.x, y - position.y);
+                auto cSize = c.container->GetSize();
+                auto cPos = c.container->GetPosition();
+                if (cPos.x <= x && cPos.x + cSize.width >= x && cPos.y <= y && cPos.y + cSize.height >= y) {
+                    c.container->OnClickEvent(x - cPos.x, y - cPos.y);
+                }
             }
         }
     };

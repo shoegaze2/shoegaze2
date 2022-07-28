@@ -6,6 +6,7 @@
 #define SHOEGAZE2_IIMAGE_H
 
 #include <Shoegaze2/System/Interface/GUI/IRenderingContext.h>
+#include <Shoegaze2/GUI/Color.h>
 
 namespace Shoegaze2
 {

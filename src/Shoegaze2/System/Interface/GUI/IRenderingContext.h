@@ -7,7 +7,6 @@
 
 namespace Shoegaze2
 {
-    class ICanvas;
     class IBrush;
     class IPaint;
     class IPath;
@@ -16,13 +15,13 @@ namespace Shoegaze2
     class IRenderingContext
     {
     private:
+        // TODO: replace singleton with UISystem ctx
         inline static IRenderingContext *handle = nullptr;
     public:
         IRenderingContext() { handle = this; }
         static IRenderingContext *Get() { return handle; }
 
         virtual bool Initialize() = 0;
-        virtual std::shared_ptr<ICanvas> CreateCanvas(Position pos, Size size, std::shared_ptr<ICanvas> parent = nullptr) = 0;
         virtual std::shared_ptr<IImage> CreateImage(int width, int height) = 0;
         virtual std::shared_ptr<IBrush> CreateBrush() = 0;
         virtual std::shared_ptr<IPaint> CreatePaint() = 0;
@@ -39,6 +38,8 @@ namespace Shoegaze2
 
         virtual int GetWidth() = 0;
         virtual int GetHeight() = 0;
+
+        virtual void Reset() = 0;
 
         virtual void SetDrawingSurface(std::shared_ptr<IImage> image) = 0;
     };

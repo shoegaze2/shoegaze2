@@ -22,7 +22,7 @@ namespace Shoegaze2 {
         View() = default;
 
         void OnResize(Size newSize) override = 0;
-        void OnDraw(Canvas canvas) override = 0;
+        void OnDraw(const Canvas& canvas) override = 0;
 
     };
 }

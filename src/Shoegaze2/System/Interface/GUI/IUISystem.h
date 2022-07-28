@@ -11,6 +11,8 @@
 namespace Shoegaze2 {
     class IUISystem {
     public:
+        Event<Position> OnClick;
+
         virtual void Update() = 0;
         virtual void Render() = 0;
 

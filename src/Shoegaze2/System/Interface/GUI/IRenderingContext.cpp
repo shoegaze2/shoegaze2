@@ -4,5 +4,5 @@
 
 #include "IRenderingContext.h"
 
-//Shoegaze2::IRenderingContext * Shoegaze2::IRenderingContext::handle = nullptr;
+Shoegaze2::IRenderingContext* Shoegaze2::IRenderingContext::handle = nullptr;
 

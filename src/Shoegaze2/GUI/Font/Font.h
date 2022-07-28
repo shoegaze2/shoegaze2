@@ -64,7 +64,7 @@ namespace Shoegaze2 {
 
         void LoadGlyph(void* face, int code);
     public:
-        inline static Font* DEFAULT = nullptr;
+        static Font* DEFAULT;
 
         Font(const char *path);
 

@@ -5,7 +5,7 @@
 #ifndef SHOEGAZE2_STRING_H
 #define SHOEGAZE2_STRING_H
 
-#include <stdint.h>
+#include <cstdint>
 #include <utility>
 #include <vector>
 #include "Encoding.h"

@@ -16,7 +16,7 @@ namespace Shoegaze2
     {
     private:
         // TODO: replace singleton with UISystem ctx
-        inline static IRenderingContext *handle = nullptr;
+        static IRenderingContext *handle;
     public:
         IRenderingContext() { handle = this; }
         static IRenderingContext *Get() { return handle; }

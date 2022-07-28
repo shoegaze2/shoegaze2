@@ -10,6 +10,7 @@
 
 using namespace Shoegaze2;
 
+Font* Font::DEFAULT = nullptr;
 
 float convFTFixed(const FT_Pos &x)
 {

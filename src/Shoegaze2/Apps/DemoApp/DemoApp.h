@@ -14,46 +14,51 @@ namespace Shoegaze2 {
     private:
         Button *CreateButton(String text, std::function<void(Position)> handler) {
             Button *b = new Button();
-            b->SetSize({100, 150});
+            b->SetSize({200, 150});
             b->SetText(text);
-            b->SetBackgroundColor(Color::FromRGBAf(1, 0, 0, 1));
+            b->SetBackgroundColor(Color::FromRGBAf(0.75, 0, 0, 1));
             b->onClickEvent = handler;
             return b;
         }
     public:
-        LinearLayout layout = LinearLayout(LinearLayout::LinearLayoutType::HORIZONTAL);
+        LinearLayout mainLayout = LinearLayout(LinearLayout::VERTICAL);
+        LinearLayout layout = LinearLayout(LinearLayout::VERTICAL);
 
+        Button *labelButton;
         Button *delayButton, *boostButton;
         bool delay = false;
         bool boost = false;
 
         DemoApp() {
-            delayButton = CreateButton("Задержка", [&](Position p) {
+            labelButton = new Button();
+            labelButton->SetText("Demo Application");
+            labelButton->SetSize({0, 200});
+
+            delayButton = CreateButton("Delay", [&](Position p) {
                 delay = !delay;
                 if (delay) {
-                    delayButton->SetBackgroundColor(Color::FromRGBAf(0, 1, 0, 1));
+                    delayButton->SetBackgroundColor(Color::FromRGBAf(0, 0.75, 0, 1));
                 } else {
-                    delayButton->SetBackgroundColor(Color::FromRGBAf(1, 0, 0, 1));
+                    delayButton->SetBackgroundColor(Color::FromRGBAf(0.75, 0, 0, 1));
                 }
             });
 
-            boostButton = CreateButton("Усиление", [&](Position p) {
+            boostButton = CreateButton("Boost", [&](Position p) {
                 boost = !boost;
                 if (boost) {
-                    boostButton->SetBackgroundColor(Color::FromRGBAf(0, 1, 0, 1));
+                    boostButton->SetBackgroundColor(Color::FromRGBAf(0, 0.75, 0, 1));
                 } else {
-                    boostButton->SetBackgroundColor(Color::FromRGBAf(1, 0, 0, 1));
+                    boostButton->SetBackgroundColor(Color::FromRGBAf(0.75, 0, 0, 1));
                 }
             });
 
             layout.Add(delayButton);
             layout.Add(boostButton);
 
-            SetContent(&layout);
-        }
+            mainLayout.Add(labelButton);
+            mainLayout.Add(&layout);
 
-        void AudioHandler() override {
-
+            SetContent(&mainLayout);
         }
     };
 }

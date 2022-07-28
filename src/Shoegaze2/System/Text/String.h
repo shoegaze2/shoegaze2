@@ -6,6 +6,7 @@
 #define SHOEGAZE2_STRING_H
 
 #include <cstdint>
+#include <cstddef>
 #include <utility>
 #include <vector>
 #include "Encoding.h"
